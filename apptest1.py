@@ -17,7 +17,6 @@ def get_db_connection():
 @app.route('/')
 def index():
     conn = get_db_connection()
-#    conn = psycopg2.connect(database="mytestdb", user='postgres', password='ubuntu20', host='192.168.1.90', port='5432')
     conn.autocommit = True
     cur = conn.cursor()
     cur.execute("SELECT * FROM exchange_rate")
