@@ -1,0 +1,5 @@
+requests==2.25.1
+flask==2.0.2
+prometheus_flask_exporter==0.18.7
+psycopg2-binary==2.9.3
+tabulate==0.8.9
