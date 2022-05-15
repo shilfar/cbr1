@@ -23,5 +23,13 @@ pipeline {
 	            echo 'Testing..'
 	            }
 	   }
+           withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
+                sh 'docker login -u umarta1 -p $PASSWORD'
+           }
+
+           stage("Push Image to Docker Hub"){
+                sh 'docker push cbr-front:$BUILD_NUMBER'
+           }
+
     }
 }
