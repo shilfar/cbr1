@@ -25,7 +25,7 @@ def index():
     columns = ['date', 'id', 'numcode', 'charcode', 'nominal', 'name', 'value']
     print(tabulate(rows, headers=columns, tablefmt='html', stralign='center'))
     valute_table = tabulate(rows, headers=columns, tablefmt='html')
-    report = open('/docker-flask-test/templates/valute.html', 'w')
+    report = open('/cbr-front/templates/valute.html', 'w')
     report.write(valute_table)
     report.close()
     cur.close()
@@ -43,7 +43,7 @@ def check():
         columns = ['date', 'id', 'numcode', 'charcode', 'nominal', 'name', 'value']
         print(tabulate(rows, headers=columns, tablefmt='html', stralign='center'))
         valute_table = tabulate(rows, headers=columns, tablefmt='html')
-        report = open('/docker-flask-test/templates/valute_3.html', 'w')
+        report = open('/cbr-front/templates/valute_3.html', 'w')
         report.write(valute_table)
         report.close()
         cur.close()

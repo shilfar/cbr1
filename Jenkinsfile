@@ -10,12 +10,12 @@ pipeline {
 	   }
 	   stage('Build Image') {
 	        steps {
-                sh 'sudo docker build -t docker-flask-test:v1 .'
+                sh 'sudo docker build -t cbr-front:$BUILD_NUMBER .'
 	        }
 	   }
 	   stage('Run Image') {
 	        steps {
-	        sh 'sudo docker run -d -p 5000:5000 --name apptest docker-flask-test:v1'
+	        sh 'sudo docker run -d -p 5000:5000 --name cbr-front cbr-front:$BUILD_NUMBER'
 	        }
 	   }
 	   stage('Testing'){
