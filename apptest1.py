@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 def get_db_connection():
-    conn = psycopg2.connect(database="mytestdb", user='postgres', password='u20', host='1.1.1.90', port='5432')
+    conn = psycopg2.connect(database="mytestdb", user='postgres', password='ubuntu20', host='192.168.1.90', port='5432')
     conn.autocommit = True
     return conn
 
