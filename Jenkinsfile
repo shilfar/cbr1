@@ -23,13 +23,19 @@ pipeline {
 	            echo 'Testing..'
 	            }
 	   }
-           withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
-                sh 'docker login -u umarta1 -p $PASSWORD'
+           stage('Push docker image to DockerHub') {
+                steps{
+                withDockerRegistry(credentialsId: 'dockerhub-cbr', url: 'https://index.docker.io/v1/') {
+                    sh '''
+                        docker push cbr-front:$BUILD_NUMBER
+                    '''
+                    }
+                }
            }
-
-           stage("Push Image to Docker Hub"){
-                sh 'docker push cbr-front:$BUILD_NUMBER'
+           stage('Delete docker image locally') {
+                steps{
+                    sh 'docker rmi cbr-front:$BUILD_NUMBER'
+                }
            }
-
-    }
+     }
 }
