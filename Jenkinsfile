@@ -18,7 +18,7 @@ pipeline {
                                 -Dsonar.projectKey=sonarqubetest \
 				-Dsonar.sources=/var/lib/jenkins/workspace/sonarqube-jenkinspipeline/ \
                                 -Dsonar.host.url=http://localhost:9000/
-				-Dsonar.qualitygate.wait=true \
+				
                              """
                        }
                 
