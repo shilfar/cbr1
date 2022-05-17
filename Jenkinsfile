@@ -13,12 +13,13 @@ pipeline {
                          
                              sh """
 				${tool("sonarqube")}/bin/sonar-scanner \
-				-D sonar.login=admin \
-                                -D sonar.password=admin1 \
-                                -D sonar.projectKey=sonarqubetest \
-				-D sonar.sources=/var/lib/jenkins/workspace/sonarqube-jenkinspipeline/ \
-                                -D sonar.host.url=http://localhost:9000/
-				"""
+				-Dsonar.login=admin \
+                                -Dsonar.password=admin1 \
+                                -Dsonar.projectKey=sonarqubetest \
+				-Dsonar.sources=/var/lib/jenkins/workspace/sonarqube-jenkinspipeline/ \
+                                -Dsonar.host.url=http://localhost:9000/
+				-Dsonar.qualitygate.wait=true \
+                             """
                        }
                 
                    }
