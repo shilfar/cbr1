@@ -5,9 +5,39 @@ pipeline {
 	        /* Cloning the repository to our workspace */
 	        steps {
 	        checkout scm
-	        }
+	          }
+                }
+                stage ('sonarqube test') {
+                   when {
+                       branch 'main'
+                   }
+                   steps {
+                       withSonarQubeEnv('sonarqube') {
+                         
+                             sh """
+				${tool("sonarqube")}/bin/sonar-scanner \
+				-D sonar.login=admin \
+                                -D sonar.password=admin \
+                                -D sonar.projectKey=sonarqubetest \
+				-D sonar.sources=/var/lib/jenkins/workspace/sonarqube-jenkinspipeline/ \
+                                -D sonar.host.url=http://localhost:9000/
+				"""
+                       }
+                
+                   }
+                }
 
-	   }
+                stage("quality gate") {
+		    when {
+                        branch 'main'
+                    }
+                    steps {
+                       timeout(time: 5, unit: 'MINUTES') {
+                       waitForQualityGate abortPipeline: true
+                       }
+                    }
+                }  
+	   
 	   stage('Build Image') {
 	        steps {
                 sh 'sudo docker build -t cbr-front:$BUILD_NUMBER .'
