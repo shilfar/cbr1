@@ -8,9 +8,6 @@ pipeline {
 	          }
                 }
                 stage ('sonarqube test') {
-                   when {
-                       branch 'main'
-                   }
                    steps {
                        withSonarQubeEnv('sonarqube') {
                          
@@ -28,9 +25,6 @@ pipeline {
                 }
 
                 stage("quality gate") {
-		    when {
-                        branch 'main'
-                    }
                     steps {
                        timeout(time: 5, unit: 'MINUTES') {
                        waitForQualityGate abortPipeline: true
