@@ -44,7 +44,7 @@ pipeline {
                 steps{
                 withDockerRegistry(credentialsId: 'dockerhub-cbr', url: 'https://index.docker.io/v1/') {
                     
-                    sh 'docker tag cbr-front:$BUILD_NUMBER  umarta1/cbr-front:$BUILD_NUMBER'
+                    sh 'docker tag cbr-front:$BUILD_NUMBER  umarta1/cbr-front:latest'
                     sh '''
                         docker push umarta1/cbr-front:$BUILD_NUMBER
                     '''
