@@ -75,6 +75,10 @@ pipeline {
                 dir('deploy') {
                     sh 'kubectl apply -f deploy-front-prod.yaml --namespace=prod'
                     sh 'kubectl get svc --namespace=prod'
+                    sh 'kubectl get pods -n prod -o wide'
+                    sh 'kubectl rollout restart deployment cbr1app-deploy-prod -n prod'
+                    sh 'kubectl get svc --namespace=prod'
+                    sh 'kubectl get pods -n prod -o wide'
                 }
             }
         }
