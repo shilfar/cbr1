@@ -55,11 +55,11 @@ pipeline {
            stage('Pull the latest docker image from DockerHub') {
                 steps{
                 withDockerRegistry(credentialsId: 'dockerhub-cbr', url: 'https://index.docker.io/v1/') {
-
+                    sh 'docker tag umarta1/cbr-front:$BUILD_NUMBER umarta1/cbr-front:latest'
                     sh '''
                         docker pull umarta1/cbr-front:$BUILD_NUMBER
                     '''
-                    sh 'docker tag umarta1/cbr-front:$BUILD_NUMBER cbr-front:latest'
+                    
                     }
                 }
            }

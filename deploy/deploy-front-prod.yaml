@@ -23,10 +23,11 @@ spec:
     spec:
       containers:
         - name : cbr1app-prod
-#          image: cbr-front:latest
-          image: umarta1/cbr-front:18
+          image: cbr-front:latest
+          imagePullPolicy: Never
+#          image: umarta1/cbr-front:19
 #          imagePullPolicy: IfNotPresent
-          imagePullPolicy: Always   
+#          imagePullPolicy: Always   
           ports:
             - containerPort: 5000
           env:
