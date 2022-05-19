@@ -69,5 +69,15 @@ pipeline {
                     sh 'docker rmi cbr-front:$BUILD_NUMBER'
                 }
            }
+           
+            stage('Deploy cbr1app') {
+            steps {
+                dir('deploy') {
+                    sh 'kubectl apply -f deploy-front-prod.yaml --namespace=prod'
+                    sh 'kubectl get svc --namespace=prod'
+                }
+            }
+        }
+
      }
 }
