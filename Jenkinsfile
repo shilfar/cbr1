@@ -59,7 +59,7 @@ pipeline {
                     sh '''
                         docker pull umarta1/cbr-front:latest
                     '''
-                    
+                    sh 'docker tag umarta1/cbr-front:latest  cbr-front:$BUILD_NUMBER'
                     }
                 }
            }
