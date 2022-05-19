@@ -46,7 +46,7 @@ pipeline {
                     
                     sh 'docker tag cbr-front:$BUILD_NUMBER  umarta1/cbr-front:latest'
                     sh '''
-                        docker push umarta1/cbr-front:$BUILD_NUMBER
+                        docker push umarta1/cbr-front:latest
                     '''
                     }
                 }
@@ -57,7 +57,7 @@ pipeline {
                 withDockerRegistry(credentialsId: 'dockerhub-cbr', url: 'https://index.docker.io/v1/') {
                     sh 'docker tag umarta1/cbr-front:$BUILD_NUMBER umarta1/cbr-front:latest'
                     sh '''
-                        docker pull umarta1/cbr-front:$BUILD_NUMBER
+                        docker pull umarta1/cbr-front:latest
                     '''
                     
                     }
