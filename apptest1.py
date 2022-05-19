@@ -12,7 +12,7 @@ app = Flask(__name__)
 def get_db_connection():
 #    conn = psycopg2.connect(database="mytestdb", user='postgres', password='ubuntu20', host='192.168.1.90', port='5432')
 #    conn = psycopg2.connect(database="exchange_rate", user='postgres', password='ubuntu20', host='fin-db-clouddevops.clhrna5oh7sa.eu-central-1.rds.amazonaws.com', port='5432')
-    conn = psycopg2.connect(database="exchange_rate", user='postgres', password='ubuntu20', host='18.198.141.159', port='5432')
+    conn = psycopg2.connect(database="postgres", user='postgres', password='ubuntu20', host='18.198.141.159', port='5432')
     conn.autocommit = True
     return conn
 
