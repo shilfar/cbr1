@@ -24,7 +24,7 @@ spec:
       containers:
         - name : cbr1app-prod
 #          image: cbr-front:latest
-          image: umarta1/cbr-front:16
+          image: umarta1/cbr-front:17
 #          imagePullPolicy: IfNotPresent
           imagePullPolicy: Always   
           ports:
