@@ -1,3 +1,10 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prod
+
+---
 apiVersion : apps/v1
 kind: Deployment
 metadata:
@@ -5,6 +12,7 @@ metadata:
   labels:
     app : cbr1app-deploy-prod
 spec:
+  replicas: 2
   selector:
     matchLabels:
       project: cbr1app-prod
@@ -15,8 +23,10 @@ spec:
     spec:
       containers:
         - name : cbr1app-prod
-          image: cbr-front:latest
-          imagePullPolicy: IfNotPresent
+#          image: cbr-front:latest
+          image: umarta1/cbr-front:16
+#          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always   
           ports:
             - containerPort: 5000
           env:
@@ -64,9 +74,10 @@ metadata:
   name: cbr1app-prod-service
   labels:
      env  : prod
-     owner: Ildar Sharafeev
+     owner: Ildar_Sharafeev
 spec:
-  type: ClusterIP
+#  type: ClusterIP
+  type: LoadBalancer
   selector:
     project: cbr1app-prod
   ports:
