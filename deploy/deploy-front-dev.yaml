@@ -86,3 +86,7 @@ spec:
       protocol  : TCP
       port      : 5000  # Port on Service
       targetPort: 5000  # Port on Pod
+<<<<<<< HEAD
+=======
+      
+>>>>>>> dev
