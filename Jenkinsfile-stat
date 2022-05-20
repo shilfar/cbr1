@@ -73,6 +73,7 @@ pipeline {
             stage('Deploy cbr1app') {
             steps {
                 dir('deploy') {
+                    sh 'kubectl delete deployment cbr1app-deploy-prod -n prod'
                     sh 'kubectl apply -f deploy-front-prod.yaml --namespace=prod'
                     sh 'kubectl get svc --namespace=prod'
                     sh 'kubectl get pods -n prod -o wide'
