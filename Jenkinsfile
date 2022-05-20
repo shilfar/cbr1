@@ -1,11 +1,13 @@
 pipeline {
 	agent any
 
-          environment {
+            environment {
                 ENV_BRNAME = "${env.BRANCH_NAME == "main" ? "prod" : "dev"}"
 		    }
 
-          stages {
+
+
+	    stages {
 	        stage('Clone Repository') {
 	        /* Cloning the repository to our workspace */
 	        steps {
@@ -85,10 +87,8 @@ pipeline {
                     sh 'kubectl rollout restart deployment cbr1app-deploy-${ENV_BRNAME} -n ${ENV_BRNAME}'
                     sh 'kubectl get svc --namespace=${ENV_BRNAME}'
                     sh 'kubectl get pods -n ${ENV_BRNAME} -o wide'
-
                 }
             }
         }
-
      }
 }
