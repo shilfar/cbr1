@@ -1,5 +1,9 @@
 pipeline {
 	agent any
+            environment {
+                ENV_BRNAME = "${env.BRANCH_NAME == "main" ? "prod" : "dev"}"
+		    }
+
 	    stages {
 	        stage('Clone Repository') {
 	        /* Cloning the repository to our workspace */
@@ -70,18 +74,19 @@ pipeline {
                 }
            }
            
-            stage('Deploy cbr1app') {
-            steps {
+           stage('Deploy cbr1app') {
+              steps {
                 dir('deploy') {
-                    sh 'kubectl apply -f deploy-front-prod.yaml --namespace=prod'
-                    sh 'kubectl get svc --namespace=prod'
-                    sh 'kubectl get pods -n prod -o wide'
-                    sh 'kubectl rollout restart deployment cbr1app-deploy-prod -n prod'
-                    sh 'kubectl get svc --namespace=prod'
-                    sh 'kubectl get pods -n prod -o wide'
+                    sh 'kubectl apply -f deploy-front-${ENV_BRNAME}.yaml --namespace=${ENV_BRNAME}'
+                    sh 'kubectl get svc --namespace=${ENV_BRNAME}'
+                    sh 'kubectl get pods -n ${ENV_BRNAME} -o wide'
+                    sh 'kubectl rollout restart deployment cbr1app-deploy-${ENV_BRNAME} -n ${ENV_BRNAME}'
+                    sh 'kubectl get svc --namespace=${ENV_BRNAME}'
+                    sh 'kubectl get pods -n ${ENV_BRNAME} -o wide'
                 }
             }
         }
+
 
      }
 }
