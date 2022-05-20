@@ -22,8 +22,8 @@ pipeline {
 				${tool("sonarqube")}/bin/sonar-scanner \
 				-Dsonar.login=admin \
                                 -Dsonar.password=admin1 \
-                                -Dsonar.projectKey=sonarqubetest \
-				-Dsonar.sources=/var/lib/jenkins/workspace/sonarqube-jenkinspipeline/ \
+                                -Dsonar.projectKey=sonarqube-prod \
+				-Dsonar.sources=/var/lib/jenkins/workspace/sonarqube-jenkinspipeline-prod/ \
                                 -Dsonar.host.url=http://localhost:9000/
 				
                              """
