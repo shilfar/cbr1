@@ -24,9 +24,6 @@ spec:
       containers:
         - name : cbr1app-dev
           image: umarta1/cbr-front:latest
-#          imagePullPolicy: Never
-#          image: umarta1/cbr-front:19
-#          imagePullPolicy: IfNotPresent
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
@@ -57,7 +54,7 @@ spec:
     kind: Deployment
     name: cbr1app-deploy-dev
   minReplicas: 2
-  maxReplicas: 7
+  maxReplicas: 5
   metrics:
   - type: Resource
     resource:
@@ -88,5 +85,5 @@ spec:
       targetPort: 5000  # Port on Pod
 <<<<<<< HEAD
 =======
-      
+
 >>>>>>> dev

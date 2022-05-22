@@ -24,10 +24,7 @@ spec:
       containers:
         - name : cbr1app-prod
           image: umarta1/cbr-front:latest
-#          imagePullPolicy: Never
-#          image: umarta1/cbr-front:19
-#          imagePullPolicy: IfNotPresent
-          imagePullPolicy: Always   
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
@@ -57,7 +54,7 @@ spec:
     kind: Deployment
     name: cbr1app-deploy-prod
   minReplicas: 2
-  maxReplicas: 7
+  maxReplicas: 5
   metrics:
   - type: Resource
     resource:
