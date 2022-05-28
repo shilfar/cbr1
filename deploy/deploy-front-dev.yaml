@@ -12,7 +12,7 @@ metadata:
   labels:
     app : cbr1app-deploy-dev
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       project: cbr1app-dev
@@ -53,7 +53,7 @@ spec:
     apiVersion: apps/v2beta1v1
     kind: Deployment
     name: cbr1app-deploy-dev
-  minReplicas: 2
+  minReplicas: 1
   maxReplicas: 5
   metrics:
   - type: Resource
