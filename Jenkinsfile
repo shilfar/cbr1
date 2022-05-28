@@ -80,7 +80,7 @@ pipeline {
             stage('Deploy cbr1app') {
             steps {
                 dir('deploy') {
-                    
+                    sh 'kubectl delete deployment cbr1app-deploy-${ENV_BRNAME} -n ${ENV_BRNAME}'
                     sh 'kubectl apply -f deploy-front-${ENV_BRNAME}.yaml --namespace=${ENV_BRNAME}'
                     sh 'kubectl get svc --namespace=${ENV_BRNAME}'
                     sh 'kubectl get pods -n ${ENV_BRNAME} -o wide'
