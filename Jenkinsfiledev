@@ -11,7 +11,7 @@ pipeline {
                 stage ('sonarqube test') {
                    steps {
                        withSonarQubeEnv('sonarqube') {
-                         
+
                              sh """
 				${tool("sonarqube")}/bin/sonar-scanner \
 				-Dsonar.login=admin \
@@ -19,13 +19,13 @@ pipeline {
                                 -Dsonar.projectKey=sonarqube-dev \
 				-Dsonar.sources=/var/lib/jenkins/workspace/sonarqube-jenkinspipeline-dev/ \
                                 -Dsonar.host.url=http://localhost:9000/
-				
+
                              """
                        }
-                
+
                    }
                 }
-	   
+
 	   stage('Build Image') {
 	        steps {
                 sh 'sudo docker build -t cbr-front:$BUILD_NUMBER .'
@@ -44,7 +44,7 @@ pipeline {
            stage('Push docker image to DockerHub') {
                 steps{
                 withDockerRegistry(credentialsId: 'dockerhub-cbr', url: 'https://index.docker.io/v1/') {
-                    
+
                     sh 'docker tag cbr-front:$BUILD_NUMBER  umarta1/cbr-front:latest'
                     sh '''
                         docker push umarta1/cbr-front:latest
@@ -56,7 +56,7 @@ pipeline {
            stage('Pull the latest docker image from DockerHub') {
                 steps{
                 withDockerRegistry(credentialsId: 'dockerhub-cbr', url: 'https://index.docker.io/v1/') {
-                    
+
                     sh '''
                         docker pull umarta1/cbr-front:latest
                     '''
@@ -70,11 +70,11 @@ pipeline {
                     sh 'docker rmi cbr-front:$BUILD_NUMBER'
                 }
            }
-           
+
             stage('Deploy cbr1app') {
             steps {
                 dir('deploy') {
-                    sh 'kubectl delete deployment cbr1app-deploy-dev -n dev'
+                    
                     sh 'kubectl apply -f deploy-front-dev.yaml --namespace=dev'
                     sh 'kubectl get svc --namespace=dev'
                     sh 'kubectl get pods -n dev -o wide'
