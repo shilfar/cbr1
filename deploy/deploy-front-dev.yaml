@@ -53,7 +53,7 @@ metadata:
   name: cbr1app-dev-autoscaling
 spec:
   scaleTargetRef:
-    apiVersion: apps/v2beta1v1
+    apiVersion: apps/v2beta1
     kind: Deployment
     name: cbr1app-dev
   minReplicas: 1
