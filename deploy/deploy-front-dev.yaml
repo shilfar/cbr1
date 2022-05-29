@@ -8,9 +8,9 @@ metadata:
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: cbr1app-deploy-dev
+  name: cbr1app-dev
   labels:
-    app : cbr1app-deploy-dev
+    app : cbr1app-dev
 spec:
   replicas: 1
   selector:
@@ -50,11 +50,11 @@ metadata:
   name: cbr1app-dev-autoscaling
 spec:
   scaleTargetRef:
-    apiVersion: apps/v2beta1v1
+    apiVersion: apps/v2beta1
     kind: Deployment
-    name: cbr1app-deploy-dev
+    name: cbr1app-dev
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 3
   metrics:
   - type: Resource
     resource:

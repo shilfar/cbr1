@@ -31,16 +31,7 @@ pipeline {
                 sh 'sudo docker build -t cbr-front:$BUILD_NUMBER .'
 	        }
 	   }
-	   stage('Run Image') {
-	        steps {
-	        sh 'sudo docker run -d -p 5000:5000 --name cbr-front cbr-front:$BUILD_NUMBER'
-	        }
-	   }
-	   stage('Testing'){
-	        steps {
-	            echo 'Testing..'
-	            }
-	   }
+
            stage('Push docker image to DockerHub') {
                 steps{
                 withDockerRegistry(credentialsId: 'dockerhub-cbr', url: 'https://index.docker.io/v1/') {
@@ -74,11 +65,11 @@ pipeline {
             stage('Deploy cbr1app') {
             steps {
                 dir('deploy') {
-                    sh 'kubectl delete deployment cbr1app-deploy-dev -n dev'
+                    sh 'kubectl delete deployment cbr1app-dev -n dev'
                     sh 'kubectl apply -f deploy-front-dev.yaml --namespace=dev'
                     sh 'kubectl get svc --namespace=dev'
                     sh 'kubectl get pods -n dev -o wide'
-                    sh 'kubectl rollout restart deployment cbr1app-deploy-dev -n dev'
+
                     sh 'kubectl get svc --namespace=dev'
                     sh 'kubectl get pods -n dev -o wide'
                 }
