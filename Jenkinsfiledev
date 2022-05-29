@@ -78,7 +78,7 @@ pipeline {
                     sh 'kubectl apply -f deploy-front-dev.yaml --namespace=dev'
                     sh 'kubectl get svc --namespace=dev'
                     sh 'kubectl get pods -n dev -o wide'
-                    sh 'kubectl rollout restart deployment cbr1app-deploy-dev -n dev'
+                    
                     sh 'kubectl get svc --namespace=dev'
                     sh 'kubectl get pods -n dev -o wide'
                 }
